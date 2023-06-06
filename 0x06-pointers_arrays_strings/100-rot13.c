@@ -1,35 +1,31 @@
-#include <stdio.h>
 #include "main.h"
 
 /**
  * rot13 - Encodes a string using ROT13.
- * @str: Input string.
- *
- * This function takes a string as input and
- * applies the ROT13 algorithm to encode it.
- * ROT13 replaces each letter with the letter 13 positions
- * ahead (wrapping around the alphabet if necessary).
- * Non-alphabetic characters are left unchanged.
- *
- * Return: A pointer to the modified string.
+ * @s: Input string.
+ * Return: Encoded string.
  */
-
-char *rot13(char *str)
+char *rot13(char *s)
 {
-	char *ptr = str;
 	int i;
 
-	for (i = 0; str[i] != '\0'; i++)
+	char rot13[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+	char ROT13[] = "nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM";
+
+	char *ptr = s;
+
+	while (*s)
 	{
-		if ((str[i] >= 'a' && str[i] <= 'm') || (str[i] >= 'A' && str[i] <= 'M'))
+		for (i = 0; i <= 52; i++)
 		{
-			str[i] += 13;
+			if (*s == rot13[i])
+			{
+				*s = ROT13[i];
+				break;
+			}
 		}
-		else if
-			((str[i] >= 'n' && str[i] <= 'z') || (str[i] >= 'N' && str[i] <= 'Z'))
-		{
-			str[i] -= 13;
-		}
+		s++;
 	}
 
 	return (ptr);
